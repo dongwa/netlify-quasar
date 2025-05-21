@@ -1,6 +1,6 @@
 {
   "name": "quasar-app-extension-netlify",
-  "version": "0.0.1",
+  "version": "0.0.2-beta.10",
   "description": "Deploy Quasar to netlify with SSR mode",
   "author": "donglin",
   "license": "MIT",

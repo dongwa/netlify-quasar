@@ -25,24 +25,11 @@ export default function (api) {
     const netlifySSRConfig = `
 [build]
   base = '.'
-  publish = 'dist/ssr/client'
-  command = 'quasar build -m ssr'
+  publish = '.netlify/v1/functions/index/client'
+  command = 'npm run build'
 
-[functions]
-  external_node_modules = ["express"]
-  directory = 'dist/ssr/netlify/functions'
-
-[[redirects]]
-  force = true 
-  from = "/assets/*"
-  status = 200
-  to = "/assets/:splat"
-
-[[redirects]]
-  force = true
-  from = "/*"
-  status = 200
-  to = "/.netlify/functions/index/:splat"
+[build.environment]
+  NODE_OPTIONS = "--max-old-space-size=4096"
     `
     fs.writeFileSync(netlifyConfigFilePath, netlifySSRConfig)
   } else {
