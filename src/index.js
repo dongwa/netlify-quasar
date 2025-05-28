@@ -13,6 +13,7 @@ function createNetlifySSRFunction(api, quasarConf) {
   fs.appendFileSync(path.join(distDir, 'index.mjs'), code, 'utf-8')
 }
 
+
 export default function (api) {
   // Quasar compatibility check; you may need
   // hard dependencies, as in a minimum version of the "quasar"
@@ -32,7 +33,7 @@ export default function (api) {
    *   (cfg: Object, ctx: Object) => undefined
    */
   api.extendQuasarConf((conf) => {
-    conf.build.distDir = '.netlify/v1/functions/index'
+    conf.build.distDir = '.netlify/functions/index'
   })
 
   /**
@@ -40,7 +41,6 @@ export default function (api) {
    *   (esbuildConf: Object, api) => undefined
    */
   if (api.hasVite === true) {
-
     api.extendSSRWebserverConf((esbuildConf) => {
       esbuildConf.bundle = true;
       esbuildConf.outfile = esbuildConf.outfile.replace(/index\.js$/, 'main.js')
@@ -48,8 +48,12 @@ export default function (api) {
   }
 
   api.afterBuild((api, { quasarConf }) => {
-    createNetlifySSRFunction(api, quasarConf)
     const distDir = quasarConf.build.distDir
+    if (api.hasWebpack === true) {
+      console.log('your are using webpack, we need rename index.mjs to main.js')
+      fs.renameSync(path.join(distDir, 'index.mjs'), path.join(distDir, 'main.js'))
+    }
+    createNetlifySSRFunction(api, quasarConf)
     console.log('install production dependencies')
     execSync('npm install', { cwd: distDir, encoding: 'utf-8' })
     console.log('success')

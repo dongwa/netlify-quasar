@@ -25,7 +25,7 @@ export default function (api) {
     const netlifySSRConfig = `
 [build]
   base = '.'
-  publish = '.netlify/v1/functions/index/client'
+  publish = '.netlify/functions/index/client'
   command = 'npm run build'
 
 [build.environment]
