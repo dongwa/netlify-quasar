@@ -1,4 +1,4 @@
-import { handler } from './main.js'
+import { handler } from './main.mjs'
 import { IncomingMessage, ServerResponse } from 'http';
 import { EventEmitter } from 'events';
 

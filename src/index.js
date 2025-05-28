@@ -10,7 +10,7 @@ function createNetlifySSRFunction(api, quasarConf) {
   console.log('Creating Netlify function')
   const distDir = quasarConf.build.distDir
   const code = fs.readFileSync(path.join(__dirname, './runtime.js'), 'utf-8')
-  fs.appendFileSync(path.join(distDir, 'index.mjs'), code, 'utf-8')
+  fs.writeFileSync(path.join(distDir, 'index.mjs'), code, 'utf-8')
 }
 
 
@@ -42,16 +42,18 @@ export default function (api) {
    */
   if (api.hasVite === true) {
     api.extendSSRWebserverConf((esbuildConf) => {
+      console.log('you are using vite, we need bundle the code')
       esbuildConf.bundle = true;
-      esbuildConf.outfile = esbuildConf.outfile.replace(/index\.js$/, 'main.js')
+      console.log("you are using vite, we need replace index.js to main.mjs")
+      esbuildConf.outfile = esbuildConf.outfile.replace(/index\.js$/, 'main.mjs')
     })
   }
 
   api.afterBuild((api, { quasarConf }) => {
     const distDir = quasarConf.build.distDir
     if (api.hasWebpack === true) {
-      console.log('your are using webpack, we need rename index.mjs to main.js')
-      fs.renameSync(path.join(distDir, 'index.mjs'), path.join(distDir, 'main.js'))
+      console.log('you are using webpack, we need rename index.mjs to main.mjs')
+      fs.renameSync(path.join(distDir, 'index.mjs'), path.join(distDir, 'main.mjs'))
     }
     createNetlifySSRFunction(api, quasarConf)
     console.log('install production dependencies')
