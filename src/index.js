@@ -33,7 +33,7 @@ export default function (api) {
    *   (cfg: Object, ctx: Object) => undefined
    */
   api.extendQuasarConf((conf) => {
-    conf.build.distDir = '.netlify/functions/index'
+    conf.build.distDir = '.netlify/v1/functions/index'
   })
 
   /**

@@ -25,8 +25,8 @@ export default function (api) {
     const netlifySSRConfig = `
 [build]
   base = '.'
-  publish = '.netlify/functions/index/client'
-  command = 'npm run build'
+  publish = '.netlify/v1/functions/index/client'
+  command = 'quasar build -m ssr'
 
 [build.environment]
   NODE_OPTIONS = "--max-old-space-size=4096"
