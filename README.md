@@ -51,10 +51,8 @@ quasar ext remove netlify
 # How to work
 
 Please read:
- https://github.com/quasarframework/quasar/discussions/16565
+https://docs.netlify.com/frameworks-api/
 
-# Donate
-If you appreciate the work that went into this App Extension, please consider [donating to Quasar](https://donate.quasar.dev).
 
 # License
 MIT (c) donglin
