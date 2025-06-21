@@ -6,7 +6,12 @@ Help you Deploy Quasar to netlify with SSR mode!
 [![npm](https://img.shields.io/npm/dt/quasar-app-extension-netlify.svg)](https://www.npmjs.com/package/quasar-app-extension-netlify)
 
 # demo
-https://github.com/dongwa/quasar-ssr-vercel-demo
+
+githug repo:
+https://github.com/dongwa/quasar-netlify-test
+
+netlify preview:
+https://quasar2-ssr.netlify.app/
 
 # Install
 ```bash
